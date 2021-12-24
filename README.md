@@ -27,7 +27,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 12. markdown table-of-content
 13. tabs: tutorial, salesforce, others
 14. ~~convert to typescript~~
-15. sitenav in docs
+15. ~~sitenav in docs~~
 16. make tutorials:
 
 - how to maintain this website
