@@ -35,6 +35,8 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 - how to setup github
 - how to add new page in website n so on
 
+17. open mdx link in new tab
+
 ## Built Using
 
 - [Next.js](https://nextjs.org/)
