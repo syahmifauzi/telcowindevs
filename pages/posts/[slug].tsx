@@ -6,7 +6,6 @@ import { getAllPostsSlug, getPostBySlug } from '@libs/mdx'
 import { Code, Frontmatter } from '@libs/types'
 
 import Container from '@components/Container'
-import BackButton from '@components/BackButton'
 
 interface Props {
   code: Code
@@ -18,7 +17,7 @@ const PostPage: NextPage<Props> = ({ code, frontmatter }: Props) => {
   const { title, date, readingTime } = frontmatter
 
   return (
-    <Container title={title}>
+    <Container title={title} sitenav>
       <div className="max-w-3xl mx-auto my-8">
         <h1 className="text-3xl sm:text-4xl md:text-5xl font-semibold mb-4">
           {title}
@@ -33,7 +32,6 @@ const PostPage: NextPage<Props> = ({ code, frontmatter }: Props) => {
           <div className="prose sm:prose-md md:prose-lg max-w-full">
             <Component />
           </div>
-          <BackButton />
         </article>
       </div>
     </Container>

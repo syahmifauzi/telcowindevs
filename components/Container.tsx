@@ -1,18 +1,19 @@
-import { ReactNode } from 'react'
+import { FC } from 'react'
 import Head from 'next/head'
 
 import Header from './Header'
 import Footer from './Footer'
+import PageToc from './PageToc'
 
 import { SITE_TITLE_SHORT } from '@libs/constants'
 
 interface Props {
-  children: ReactNode
   title?: string
+  sitenav?: boolean
   customMeta?: any
 }
 
-const Container = ({ children, title, ...customMeta }: Props) => {
+const Container: FC<Props> = ({ children, title, sitenav, ...customMeta }) => {
   const meta = {
     site_name: SITE_TITLE_SHORT,
     title: title ? `${title} | ${SITE_TITLE_SHORT}` : SITE_TITLE_SHORT,
@@ -48,7 +49,17 @@ const Container = ({ children, title, ...customMeta }: Props) => {
       </Head>
       <Header />
       <div className="container max-w-6xl mx-auto mb-8 px-4">
-        <main>{children}</main>
+        <div
+          className={`${sitenav ? 'md:grid grid-cols-4 gap-4 relative' : ''}`}>
+          <main className="col-span-3 md:px-2">{children}</main>
+          {sitenav && (
+            <div className="hidden md:block relative pt-4">
+              <div className="fixed">
+                <PageToc />
+              </div>
+            </div>
+          )}
+        </div>
       </div>
       <Footer />
     </>

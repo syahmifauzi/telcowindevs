@@ -160,3 +160,46 @@ pre {
 .rehype-code-title + pre {
   @apply mt-0 rounded-t-none;
 }
+
+/* TOC */
+.toc {
+  background-color: white;
+  border-radius: 0.25rem;
+  font-size: 0.875rem;
+  padding: 1rem;
+}
+
+ol.toc-list {
+  padding: 0;
+}
+
+li.toc-list-item {
+  padding: 0;
+}
+
+a.toc-link {
+  color: #333;
+  border-left: 3px solid #ddd;
+  padding: 0.3rem 0 0.3rem 1rem;
+  display: inline-block;
+}
+a.toc-link ~ ol.toc-list a.toc-link {
+  padding-left: 2rem;
+}
+a.toc-link ~ ol.toc-list a.toc-link ~ ol.toc-list a.toc-link {
+  padding-left: 3rem;
+}
+a.toc-link.is-active-link {
+  color: #222;
+  font-weight: 700;
+  border-left: 3px solid #1d2b36;
+}
+
+ol.toc-list.is-collapsible {
+  transition: max-height 225ms ease-in-out;
+  max-height: 100rem;
+  overflow: hidden;
+}
+ol.toc-list.is-collapsible.is-collapsed {
+  max-height: 0rem;
+}

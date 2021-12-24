@@ -6,7 +6,6 @@ import { getAllSnippetsSlug, getSnippetBySlug } from '@libs/mdx'
 import { Code, Frontmatter } from '@libs/types'
 
 import Container from '@components/Container'
-import BackButton from '@components/BackButton'
 import SnippetIcon from '@components/SnippetIcon'
 
 interface Props {
@@ -19,7 +18,7 @@ const SnippetsPage: NextPage<Props> = ({ frontmatter, code }: Props) => {
   const { title, description, icon } = frontmatter
 
   return (
-    <Container title={title}>
+    <Container title={title} sitenav>
       <div className="max-w-3xl mx-auto my-8">
         <div className="flex justify-between">
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-semibold mb-4">
@@ -33,7 +32,6 @@ const SnippetsPage: NextPage<Props> = ({ frontmatter, code }: Props) => {
         <div className="prose sm:prose-md md:prose-lg max-w-full">
           <Component />
         </div>
-        <BackButton />
       </article>
     </Container>
   )
