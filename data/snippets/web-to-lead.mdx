@@ -1,0 +1,27 @@
+---
+title: 'Web-to-Lead'
+description: "Create web-to-lead form and embed it on 3rd party website to capture visitors' information"
+icon: 'salesforce'
+date: '2021-12-17'
+---
+
+### Steps to create Web-to-Lead
+
+1. Select `Setup > Feature Settings > Marketing > Web-to-Lead` and click `Create Web-to-Lead Form`.
+2. Add fields to capture, insert the return URL, and click `Generate`.
+3. Copy the generated HTML form and paste it on the 3rd party website.
+
+Take note of these 3 lines:
+
+```html
+<form action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8" method="POST" />
+<input type="hidden" name="oid" value="<OID-VALUE>" />
+<input type="hidden" name="retURL" value="<RETURN-URL-VALUE>" />
+```
+
+- Line 1: The data will be sent to the URL when the form is submitted   
+- Line 2: The `<OID-VALUE>` is the Organization ID or org id. You can get the Organization ID in `Setup > Company Settings > Company Information`.   
+- Line 3: The `<RETURN-URL-VALUE>` is where the user will be redirected after they submit the form.   
+
+
+> Note: You can modify the form styling as you need. Just make sure the `name` attribute for all fields is the same as in the Lead object.

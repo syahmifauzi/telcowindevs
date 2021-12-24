@@ -1,0 +1,292 @@
+---
+title: 'How to setup Visual Studio Code for Salesforce'
+excerpt: "Visual Studio Code is the go-to code editor for Salesforce developers. It's free, open-source, and available for Windows, Linux, and macOS."
+thumbnail: '/static/images/blog/vscode.jpg'
+date: '2021-12-16'
+author:
+  name: Syahmi Fauzi
+  picture: '/static/images/authors/sf.jpg'
+---
+
+### Download and Install VSCode
+
+To download Visual Studio Code to your system, just go to:- [https://code.visualstudio.com/](https://code.visualstudio.com/) and you'll see an option to download VSCode for your system. I recommend you to download the stable build which is usually free from bugs, however, if you're keen to get the latest upcoming features before the world, you can download the insiders edition too.
+
+Run the setup file to install VScode in your system as below
+
+![image alt text](/static/images/blog/image_0.png)
+
+![image alt text](/static/images/blog/image_1.png)
+
+![image alt text](/static/images/blog/image_2.png)
+
+![image alt text](/static/images/blog/image_3.png)
+
+Once Download and install VSCode in your system and on opening, you'll see the welcome screen as shown below:-
+
+![image alt text](/static/images/blog/image_4.png)
+
+### Download and Install Salesforce DX CLI
+
+Now, as we've installed VSCode in our system, the next step is to install Salesforce DX CLI. To install that, go to:[- https://developer.salesforce.com/tools/sfdxcli](https://developer.salesforce.com/tools/sfdxcli) and you'll see the page as shown below from where you can download the salesforce dx cli and install the same on your system.
+
+![image alt text](/static/images/blog/image_5.png)
+
+Once you have sfdx cli installed, you can test it by opening the command window and typing **sfdx** and then pressing **enter** you should get the result similar to the one given in the below image:-
+
+![image alt text](/static/images/blog/image_6.png)
+
+Cool. You've now properly installed Salesforce DX CLI in your system. Let's get to the next step.
+
+### Install Salesforce Extension Pack
+
+In order to make our IDE Salesforce ready. Salesforce has made its own extension pack available for developers. Once you open your VSCode IDE you can click on the 5th icon on the left hand sidebar menu which is for managing extensions. Search for **Salesforce Extension Pack** and click on the first search result as shown in the below image:-
+
+![image alt text](/static/images/blog/image_7.png)
+
+however you'll see a green button with **install** written on it as shown in the other search results in the image, just click on that button and it'll install the **Salesforce Extension Pack** for you. Salesforce Extension pack consists of a number of extensions, all of which are published by Salesforce. The extension pack has the following extensions as of now which will be activated automatically as you install this pack:-
+
+1. Salesforce CLI Integration
+
+2. Apex
+
+3. Visualforce
+
+4. Aura Components
+
+5. Apex Interactive Debugger
+
+6. Apex Replay Debugger
+
+7. Lightning Web Components
+
+Many more extensions can be added to this extension pack in future as it's officially maintained by Salesforce.
+
+### Connecting with your Salesforce Org
+
+Now, as you've installed Salesforce DX CLI, VS Code and all the required extensions, you're good to connect your IDE with your Salesforce Org. To do so, use command:- **Ctrl + Shift + P** or go to the View -> Command Palette and you'll see the command palette. Start writing:- **Create Project with Manifest** and press enter on the first option as shown below:-
+
+![image alt text](/static/images/blog/image_8.png)
+
+In the next step, you need to enter the project name as shown below:-
+
+Select standard Project Template (default) as below
+
+![image alt text](/static/images/blog/image_9.png)
+
+Enter your own project name Eg: SFDCstopOrg and Press Enter
+
+![image alt text](/static/images/blog/image_10.png)
+
+Next, you need to select the location where you want the project (Ex: **SagarDevOrg**) to be created. Move to the desired location in the dialog box as shown below and click on **Create Project**
+
+![image alt text](/static/images/blog/image_11.png)
+
+Your project(**SagarDevOrg**) will be created and you'll see the project structure in the left panel of VS Code which will be similar to the below image.
+
+![image alt text](/static/images/blog/image_12.png)
+
+Now, we need to authorize an org. Press:- **Ctrl + Shift + P** and type **Authorize an Org**. Here, we're going to connect with our dev org or a sandbox instead of a dev hub or scratch org. You'll see the first option as:- **Authorize an Org** and press enter.
+
+![image alt text](/static/images/blog/image_13.png)
+
+Next, we need to select the environment we need to connect to:-
+
+![image alt text](/static/images/blog/image_14.png)
+
+You can connect to a sandbox or a production environment and even specify a custom url. Here, I am going to connect with my dev org which is a production environment for me. Just select Project Default environment and press enter.
+
+Now, we need to enter the org alias i.e. a familiar username for your org. I personally keep the same name which I have entered as the project name. In my case it's:- **SagarDevOrg**. Just enter the alias as shown in the below image and press enter.
+
+![image alt text](/static/images/blog/image_15.png)
+
+It'll automatically open your default browser and the login page where you can login with your org credentials. After logging in, Salesforce DX CLI will ask for the required permissions as shown in the below image, click **Allow**.
+
+![image alt text](/static/images/blog/image_16.png)
+
+![image alt text](/static/images/blog/image_17.png)
+
+It'll give Salesforce DX CLI the required permissions and will open your org. Switch back to VS Code and you'll see a message similar to the below image:-
+
+![image alt text](/static/images/blog/image_18.png)
+
+As shown in the above image, you may now close the browser. Now, we've successfully authorized our org. The next step is to get all our classes, triggers and other required files in our IDE. To do so, open **package.xml** from the manifest subfolder present in the left pane. Right click anywhere in **package.xml** and click the option:- **SFDX: Retrieve Source in Manifest from Org** as shown in the below image:-
+
+![image alt text](/static/images/blog/image_19.png)
+
+It'll retrieve all the metadata from your org which is specified in your **package.xml** file. For more information on how to create your package.xml, you can refer to the official salesforce documentation here:- [https://developer.salesforce.com/docs/atlas.en-us.api_meta.meta/api_meta/manifest_samples.htm](https://developer.salesforce.com/docs/atlas.en-us.api_meta.meta/api_meta/manifest_samples.htm)
+
+Once, you've fetched all the data, you can see it under the **force-app** folder\*\* \*\*in the respective subfolders as shown below:-
+
+![image alt text](/static/images/blog/image_20.png)
+
+We can open any class, lightning component, vf page or any other metadata by simply clicking on it and it'll show in the VS Code Editor as shown in the below image:-
+
+![image alt text](/static/images/blog/image_21.png)
+
+You can do your changes and push the required changes to your org by right clicking and selecting:- **SFDX: Deploy This Source to Org** option. Similarly, to fetch the updated file from org to VS Code IDE, you can select **SFDX: Retrieve This Source from Org**. In order to get the whole org's refresh just move on to your **package.xml**, right click and select **SFDX: Retrieve Source in Manifest from Org** option.
+
+So, that's all for this tutorial, give it a try and let me know.
+
+I decided to research more on this and I formed a list of **10 VSCode Extensions** I found most helpful for Salesforce Developers. Some of these extensions are focused primarily for Salesforce Development however, many of these can be generally used by all the developers who use VSCode whether they're Salesforce or Non-Salesforce Developers. So, let's begin.
+
+### 1. Salesforce Extension Pack
+
+If you read my post above, you'll see that I want to know about the extensions apart from **Salesforce Extension Pack** because, Salesforce Extension Pack is the required and No.1 extension to use if you're a Salesforce Developer.
+
+![image alt text](/static/images/blog/image_22.gif)
+
+As the name suggests, it is an extension pack, so it primarily consists of 6 extensions which are as follows:-
+
+1. **Salesforce CLI Integration** :- This extension primarily link with your Salesforce CLI and helps you to connect with your Salesforce Environment using Salesforce DX commands.
+
+2. **Apex** :- This extension provided syntax highlighting and code completion for Apex.
+
+3. **Apex Interactive Debugger** :- This extension enables you to debug your apex code right from your IDE.
+
+4. **Apex Replay Debugger** :- This extension replays the apex execution from a debug log reference and helps in debugging the error in your apex code.
+
+5. **Lightning Web Components** :- This extension enables you to create and work on lightning web components. You can create, edit and deploy lightning web components right from your IDE to Salesforce.
+
+6. **Aura Components** :- This extension enables you to work on normal lightning components that uses the aura framework.
+
+7. **Visualforce** :- This extension enables you to work on Visualforce Pages and Components right from your IDE.
+
+If you want to know more about using these extensions and setting up **Salesforce CLI** which is a pre-requisite for connecting with your Salesforce Org you can have a quick look about **Setting up VSCode with your Salesforce Org** **[her**e](https://www.sfdcstop.com/2019/06/how-to-setup-visual-studio-code-for.html). However, if you want me to explain about each extension in this pack in detail, let me know in the comments down below.
+
+**Official Link to Marketplace:- **[https://marketplace.visualstudio.com/items?itemName=salesforce.salesforcedx-vscode](https://marketplace.visualstudio.com/items?itemName=salesforce.salesforcedx-vscode)
+
+### 2. Apex PMD
+
+As developers, we all want to write quality code right ? Apex PMD allows you to run static analysis on your Apex and Visualforce files.
+
+![image alt text](/static/images/blog/image_23.gif)
+
+As you can see in the above image, Apex PMD will do the static code analysis on your apex code and will report the errors right away, you can also manage when to run code analysis in your user settings as shown below:-
+
+![image alt text](/static/images/blog/image_24.png)
+
+You can run Apex PMD on file open, on file save and there are a lot of other options that you can configure. I personally prefer running it on file save so that you can view the errors each time you make any changes to your code and you're saving your file. You can also setup your custom rule-sets for Apex PMD.
+
+**Official Link to Marketplace:- **[https://marketplace.visualstudio.com/items?itemName=chuckjonas.apex-pmd](https://marketplace.visualstudio.com/items?itemName=chuckjonas.apex-pmd)
+
+### 3. Salesforce Package.xml Generator Extension for VS Code
+
+Have you ever tried deployment using Salesforce DX or ANT deployment tool ? It's quite easy and handy but the only tough task is to create a **package.xml** manually which consists of the names of all the metadata components we're going to deploy. There are some online tools available that connect with your org and allow you to dynamically create a package.xml. Using **Salesforce Package.xml Generator** extension you can create a package.xml right inside the IDE you're working on and that too dynamically without writing a single line yourself.
+
+<table>
+  <tr>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Opening the extension using Command Palette</td>
+  </tr>
+</table>
+
+<table>
+  <tr>
+    <td></td>
+  </tr>
+  <tr>
+    <td>
+      Selecting the metadata components dynamically to generate package.xml
+    </td>
+  </tr>
+</table>
+
+**Official Link to Marketplace:- **[https://marketplace.visualstudio.com/items?itemName=VignaeshRamA.sfdx-package-xml-generator&ssr=false](https://marketplace.visualstudio.com/items?itemName=VignaeshRamA.sfdx-package-xml-generator&ssr=false)
+
+### 4. Git Lens - Git supercharged
+
+Git is the base of CI/CD. Visual Studio Code has built in source control functionality which allows you to view the difference, perform commits, switch branches and push + pull from remote repository. Git Lens provides the next level of insights right in your IDE using which, you can better understand your code.
+
+![image alt text](/static/images/blog/image_25.gif)
+
+With Git Lens, you can directly see within a file, when a single line or a code block was changed and who changed it along with the commit message. You can also view it's history to understand how the code evolved. Git Lens provides a number of features, some of which includes:- Code Lens, Current Line Blame, Repositories View, File History View etc. You can learn about all the features in detail by visiting the official marketplace page.
+
+**Official Link to Marketplace:- **[https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens](https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens)
+
+### 5. Bookmarks
+
+Another powerful extension we can use in VS Code is **Bookmarks**. As the name suggests, bookmarks simply allow us to mark/unmark positions in our code and we can also give it a friendly name.
+
+![image alt text](/static/images/blog/image_26.png)
+
+We can also see and navigate through all the bookmarks using a dedicated sidebar, jump through bookmarks, select all the bookmarked lines and select region within bookmarks. With bookmarks, you don't need to search for a code if you need to refer to or edit it later, you can simply bookmark it and give it a friendly name to refer it later.
+
+![image alt text](/static/images/blog/image_27.png)
+
+**Official Link to Marketplace:- **[https://marketplace.visualstudio.com/items?itemName=alefragnani.Bookmarks](https://marketplace.visualstudio.com/items?itemName=alefragnani.Bookmarks)
+
+### 6. Settings Sync
+
+How often do you need to change your system ? and each time you have to setup VSCode again and again because your themes, extensions, key-bindings and everything that you use again and again is not configured properly ?
+
+Well, you don't need to worry now because **Settings Sync** will take care of that. **Settings Sync** as the name suggests keep your VSCode settings in sync. It includes themes, keybindings, workspaces, extensions and many other configurations which are uploaded to a GitHub Gist so that it can be used across multiple machines. After setting it up, you can upload or download all your settings directly in your VSCode using one command.
+
+<table>
+  <tr>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Setting up and uploading your settings to a GitHub Gist</td>
+  </tr>
+</table>
+
+It also allows provides you an option to auto update using which all your local changes in settings will be updated as a revised version of GitHub Gist automatically.
+
+**Official Link to Marketplace:- **[https://marketplace.visualstudio.com/items?itemName=Shan.code-settings-sync](https://marketplace.visualstudio.com/items?itemName=Shan.code-settings-sync)
+
+### 7. Better Comments
+
+With **Better Comments** you can classify and write more human friendly comments in your code. It classifies your comments into:- Alerts, Queries, TODOs and Highlights by giving each a specific color.
+
+![image alt text](/static/images/blog/image_28.png)
+
+The thing I love about **Better Comments** is that you can also form your custom rules by simply editing it in the settings, you just need to specify the tag you'll start your line with, the color you want to use to highlight that, whether you want a strikethrough or not and the background color if you want one, as shown below:-
+
+![image alt text](/static/images/blog/image_29.png)
+
+**Official Link to Marketplace:- **[https://marketplace.visualstudio.com/items?itemName=aaron-bond.better-comments](https://marketplace.visualstudio.com/items?itemName=aaron-bond.better-comments)
+
+### 8. Bracket Pair Colorizer
+
+**Bracket Pair Colorizer** identifies the related opening and closing brackets with a unique color. You can define which characters will be matched and which colors will be used, in settings.
+
+![image alt text](/static/images/blog/image_30.png)
+
+There is also a new extension being developed named as:- **Bracket Pair Colorizer 2** which is the better version of **Bracket Pair Colorizer **but it's in beta mode right now.
+
+**Official Link to Marketplace:- **[https://marketplace.visualstudio.com/items?itemName=CoenraadS.bracket-pair-colorizer](https://marketplace.visualstudio.com/items?itemName=CoenraadS.bracket-pair-colorizer)
+
+### 9. Auto Rename Tag
+
+Do you work on lightning or visualforce ? If yes, this extension is definitely of your use. When this extension is activated and you rename one HTML/XML tag, the paired HTML/XML tag is automatically renamed. It also works with lightning/aura tags.
+
+![image alt text](/static/images/blog/image_31.gif)
+
+**Official Link to Marketplace:- **[https://marketplace.visualstudio.com/items?itemName=formulahendry.auto-rename-tag](https://marketplace.visualstudio.com/items?itemName=formulahendry.auto-rename-tag)
+
+### 10. vscode-icons
+
+With **vscode-icons** you can identify your project folder and files with user friendly icons.
+
+![image alt text](/static/images/blog/image_32.gif)
+
+It automatically identifies the type of file based on the extension and link it with a unique icon.
+
+**Official Link to Marketplace:- **[https://marketplace.visualstudio.com/items?itemName=vscode-icons-team.vscode-icons](https://marketplace.visualstudio.com/items?itemName=vscode-icons-team.vscode-icons)
+
+So, these were the Top 10 VSCode Extensions I believe are most useful for Salesforce Developers. However, there are a lot of other amazing extensions that you can try, some of them are a replacement of one of the above extensions as it provides the same functionality and others may make your lives more easier by giving you more features. I am listing some of them below:-
+
+1. **ForceCode:- **This is a one stop shop for Salesforce Development in VSCode. It is quite easier to use and has a number of features which are unique to this extension and very useful like:- **Bulk record updates**, **Execute Anonymous** etc. Link:- [https://marketplace.visualstudio.com/items?itemName=JohnAaronNelson.ForceCode](https://marketplace.visualstudio.com/items?itemName=JohnAaronNelson.ForceCode)
+
+2. **CodeScan**:- If you use SonarQube tool for scanning your code in order to implement best practices, this extension is of much use. You can also use CodeScan cloud on the other hand which will scan your code as you type it in your IDE and report bugs. Link:- [https://marketplace.visualstudio.com/items?itemName=codescansf.codescan-vscode](https://marketplace.visualstudio.com/items?itemName=codescansf.codescan-vscode)
+
+3. **CSS Peek**:- Allows you to have a look at the CSS code directly from HTML by hovering on it. Link:- [https://marketplace.visualstudio.com/items?itemName=pranaygp.vscode-css-peek](https://marketplace.visualstudio.com/items?itemName=pranaygp.vscode-css-peek)
+
+4. **SalesforceDX Code Companion:- **This extension works with SalesforceDX CLI and provides some additional features like:- Better performance while pushing the code to Salesforce Org, opening a VF page directly from VSCode and even has a command to open SLDS website which is required very often while working on Lightning/LWC. You can also switch the org easily, open the component library etc. Link:- [https://marketplace.visualstudio.com/items?itemName=MohithShrivastava.dx-code-companion](https://marketplace.visualstudio.com/items?itemName=MohithShrivastava.dx-code-companion)
+
+5. **Trailing Spaces:-** This extension highlight the trailing spaces and delete them in a flash. Trailing spaces are the extra spaces at the end of each line that we have while writing code. It's a very useful extension especially if you're tracking your code using git. Trailing spaces makes it difficult to view the actual change as even an extra space is counted as a modification in git. However, using this extension, it'll not be an issue within your project team. Link:- [https://marketplace.visualstudio.com/items?itemName=shardulm94.trailing-spaces](https://marketplace.visualstudio.com/items?itemName=shardulm94.trailing-spaces)
+
+**Disclaimer:- ** All these extensions are arranged in the order according to my personal opinion based on their usability, requirement in Salesforce Development. It doesn't classify any extension better then the other, as each of them has it's own features and value.

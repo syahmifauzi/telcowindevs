@@ -1,0 +1,134 @@
+---
+title: 'Basic Apex'
+description: 'Apex Programming Cheatsheet'
+icon: 'salesforce'
+date: '2021-12-24'
+---
+
+### Hello World Program
+
+```apex
+public class MyClass {
+    public static void main(String[] args) {
+        System.out.println('Hello World');
+    }
+}
+```
+
+### Comments in Apex
+
+```apex
+// This is Single Line Comment
+/* This is Multiple Line Comment */
+```
+
+### Primitive Data Types
+
+```apex
+// Syntax: <dataType> <variableName> = <value>;
+String authorName = 'Syahmi Fauzi';
+Integer age = 20;
+Boolean isApexFun = true;
+Double piValue = 3.141592653589793238;
+Long randomLongNumber = 8748693648L;
+ID id='00300000003T2PGAA0';
+```
+
+### Non-Primitive Data Types
+
+String, Arrays, and Classes
+
+### Operators in Apex
+
+|    Type    |            Operators             |
+| :--------: | :------------------------------: |
+| Arithmetic |     `+, -, *, /, %, ++, --`      |
+| Assignment | `=, +=, -=, *=, /=, %=, &=, etc` |
+| Comparison |      `==, !=, >, <, >=, <=`      |
+|  Logical   |          `&&, \|\|, !`           |
+|  Bitwise   |            `^, &, \|`            |
+
+### Useful String Methods
+
+```apex
+String text = 'Hello World';
+System.debug(text.length); // 11
+System.debug(text.toUpperCase); // HELLO WORLD
+System.debug(text.indexOf('World')); // 6
+System.debug(text.contains('Hello')); // true
+System.debug(text.charAt(0)); // 72
+System.debug(text.endsWith('friend')); // false
+System.debug(text.indexOf('Apex')); // -1
+```
+
+> See [Apex Reference Guide](https://developer.salesforce.com/docs/atlas.en-us.apexref.meta/apexref/apex_methods_system_string.htm) for more on String methods.
+
+### Useful Math Methods
+
+```apex
+System.debug(Math.min(2, 3));
+System.debug(Math.max(2, 3));
+System.debug(Math.sqrt(36));
+System.debug(Math.abs(-32));
+System.debug(Math.random());
+```
+
+### Conditional Statements
+
+#### if, else if, else
+
+```apex
+Integer age = 20;
+
+if (age < 15) {
+    System.debug('Too young');
+} else if (age <= 20) {
+    System.debug('Welcome to the club');
+} else if (age <= 40) {
+    System.debug('You still can join us');
+} else {
+    System.debug('Sorry, you can\'t join us');
+}
+```
+
+> Note: Curly braces is optional if there is only one statement in the code block.
+
+#### ternary operator
+
+```apex
+Boolean isFun = true;
+String message = isFun ? 'You are having fun' : 'Not fun at all';
+```
+
+### Loops in Apex
+
+#### for loop
+
+```apex
+List<String> fruits = new List<String>{'apple', 'orange', 'grape'};
+for (Integer i = 0; i < fruits.size(); ++i) {
+    System.debug(fruits[i]);
+}
+```
+
+#### for each loop
+
+```apex
+List<String> fruits = new List<String>{'apple', 'orange', 'grape'};
+for (String fruit : fruits) {
+    System.debug(fruit);
+}
+```
+
+#### while loop
+
+```apex
+// How many times `num` can be divided by 2 before it is less than or equal to 1?
+Integer times = 0;
+Integer num = 17;
+while (num > 1) {
+    num /= 2;
+    ++times;
+}
+System.debug(times + ' times'); // 4 times
+```
