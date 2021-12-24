@@ -48,7 +48,7 @@ const Footer = () => {
             <OutsideLink href="https://www.instagram.com/telcowin/">
               <FaInstagram size={22} />
             </OutsideLink>
-            <OutsideLink href="https://github.com/syahmifauzi/telcowin-devs/">
+            <OutsideLink href="https://github.com/syahmifauzi/telcowindevs/">
               <FaGithub size={22} />
             </OutsideLink>
           </div>
