@@ -5,6 +5,7 @@ import {
   FaInstagram,
   FaGithub
 } from 'react-icons/fa'
+
 import OutsideLink from './OutsideLink'
 
 import { SITE_TITLE_SHORT } from '@libs/constants'
