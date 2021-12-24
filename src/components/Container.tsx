@@ -33,7 +33,7 @@ const Container: FC<Props> = ({ children, title, sitenav, ...customMeta }) => {
         <meta name="description" content={meta.description} />
         <meta name="keywords" content="telcowin, salesforce, apex, lwc" />
         <meta name="author" content={meta.author} />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/static/images/favicon.ico" />
         {/* <meta property="og:url" content={`/${router.asPath}`} /> */}
         {/* <link rel="canonical" href={`/${router.asPath}`} /> */}
         <meta property="og:type" content={meta.type} />
