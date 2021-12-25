@@ -23,10 +23,10 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 - ~~markdown table-of-content~~
 - ~~Use Image component for Hero section~~
 - ~~Add author's name, reading time, and date on post page~~
+- ~~Add copy to clipboard in markdown code block~~
 - Table scroll horizontal
 - Snippet icons
 - Footer
-- Add copy to clipboard in markdown code block
 - noti after form submit
 - tabs: tutorial, salesforce, others
 - make tutorials:
