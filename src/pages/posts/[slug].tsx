@@ -6,6 +6,7 @@ import { getAllPostsSlug, getPostBySlug } from '@libs/mdx'
 import { Code, Frontmatter } from '@libs/types'
 
 import Container from '@components/Container'
+import MDXComponent from '@components/MDXComponents'
 
 interface Props {
   code: Code
@@ -30,7 +31,7 @@ const PostPage: NextPage<Props> = ({ code, frontmatter }: Props) => {
         <hr className="border-dashed border-gray-400 my-4" />
         <article className="max-w-3xl mx-auto">
           <div className="prose sm:prose-md md:prose-lg max-w-full">
-            <Component />
+            <Component components={{ ...MDXComponent }} />
           </div>
         </article>
       </div>

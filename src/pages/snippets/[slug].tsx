@@ -7,6 +7,7 @@ import { Code, Frontmatter } from '@libs/types'
 
 import Container from '@components/Container'
 import SnippetIcon from '@components/SnippetIcon'
+import MDXComponent from '@components/MDXComponents'
 
 interface Props {
   code: Code
@@ -30,7 +31,7 @@ const SnippetsPage: NextPage<Props> = ({ frontmatter, code }: Props) => {
       </div>
       <article className="max-w-3xl mx-auto my-8">
         <div className="prose sm:prose-md md:prose-lg max-w-full">
-          <Component />
+          <Component components={{ ...MDXComponent }} />
         </div>
       </article>
     </Container>
