@@ -6,6 +6,10 @@ export type Frontmatter = {
   readingTime?: string
   date?: string
   icon?: string
+  author?: {
+    name?: string
+    picture?: string
+  }
 }
 
 export type Code = any

@@ -20,14 +20,14 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 - ~~convert to typescript~~
 - ~~sitenav in docs~~
 - ~~open mdx link in new tab~~
+- ~~markdown table-of-content~~
 - ~~Use Image component for Hero section~~
+- ~~Add author's name, reading time, and date on post page~~
 - Table scroll horizontal
 - Snippet icons
 - Footer
-- Add post's author and avatar
 - Add copy to clipboard in markdown code block
 - noti after form submit
-- markdown table-of-content
 - tabs: tutorial, salesforce, others
 - make tutorials:
 

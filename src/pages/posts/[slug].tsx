@@ -7,6 +7,7 @@ import { Code, Frontmatter } from '@libs/types'
 
 import Container from '@components/Container'
 import MDXComponent from '@components/MDXComponents'
+import { BiCalendar, BiTime, BiUser } from 'react-icons/bi'
 
 interface Props {
   code: Code
@@ -15,7 +16,7 @@ interface Props {
 
 const PostPage: NextPage<Props> = ({ code, frontmatter }: Props) => {
   const Component = useMemo(() => getMDXComponent(code), [code])
-  const { title, date, readingTime } = frontmatter
+  const { title, date, readingTime, author } = frontmatter
 
   return (
     <Container title={title} sitenav>
@@ -23,10 +24,16 @@ const PostPage: NextPage<Props> = ({ code, frontmatter }: Props) => {
         <h1 className="text-3xl sm:text-4xl md:text-5xl font-semibold mb-4">
           {title}
         </h1>
-        <div className="flex justify-end gap-2 font-light text-sm sm:text-base">
-          <span>{date}</span>
-          <span>&bull;</span>
-          <span>{readingTime}</span>
+        <div className="font-light text-sm sm:text-base py-2">
+          <div className="flex items-center gap-x-1">
+            <BiCalendar className="inline" /> {date}
+          </div>
+          <div className="mt-1 flex items-center gap-x-1">
+            <BiTime className="inline" /> {readingTime}
+          </div>
+          <div className="mt-1 flex items-center gap-x-1">
+            <BiUser className="inline" /> By <b>{author?.name}</b>
+          </div>
         </div>
         <hr className="border-dashed border-gray-400 my-4" />
         <article className="max-w-3xl mx-auto">
