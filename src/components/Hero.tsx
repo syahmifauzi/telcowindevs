@@ -1,10 +1,16 @@
 import { SITE_TITLE_SHORT } from '@libs/constants'
+import Image from 'next/image'
 
 const Hero = () => {
   return (
-    <div
-      className="h-96 bg-cover bg-center text-white object-fill -mx-4"
-      style={{ backgroundImage: `url('/static/images/hero.jpg')` }}>
+    <div className="h-96 text-white -mx-4 relative">
+      <Image
+        src="/static/images/hero.jpg"
+        alt={SITE_TITLE_SHORT}
+        layout="fill"
+        objectFit="cover"
+        className="-z-10"
+      />
       <div className="h-full flex flex-col items-center justify-center text-center bg-black/40 px-4">
         <span className="text-4xl sm:text-5xl font-bold">
           {SITE_TITLE_SHORT}

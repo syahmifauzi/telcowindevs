@@ -20,9 +20,9 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 - ~~convert to typescript~~
 - ~~sitenav in docs~~
 - ~~open mdx link in new tab~~
+- ~~Use Image component for Hero section~~
 - Table scroll horizontal
 - Snippet icons
-- Use Image component for Hero section
 - Footer
 - Add post's author and avatar
 - Add copy to clipboard in markdown code block
