@@ -5,7 +5,7 @@ icon: 'salesforce'
 date: '2021-12-24'
 ---
 
-### Hello World Program
+## Hello World Program
 
 ```apex
 public class MyClass {
@@ -15,14 +15,14 @@ public class MyClass {
 }
 ```
 
-### Comments in Apex
+## Comments in Apex
 
 ```apex
 // This is Single Line Comment
 /* This is Multiple Line Comment */
 ```
 
-### Primitive Data Types
+## Primitive Data Types
 
 ```apex
 // Syntax: <dataType> <variableName> = <value>;
@@ -34,11 +34,11 @@ Long randomLongNumber = 8748693648L;
 ID id='00300000003T2PGAA0';
 ```
 
-### Non-Primitive Data Types
+## Non-Primitive Data Types
 
 String, Arrays, and Classes
 
-### Operators in Apex
+## Operators in Apex
 
 |    Type    |            Operators             |
 | :--------: | :------------------------------: |
@@ -48,7 +48,7 @@ String, Arrays, and Classes
 |  Logical   |          `&&, \|\|, !`           |
 |  Bitwise   |            `^, &, \|`            |
 
-### Useful String Methods
+## Useful String Methods
 
 ```apex
 String text = 'Hello World';
@@ -63,7 +63,7 @@ System.debug(text.indexOf('Apex')); // -1
 
 > See [Apex Reference Guide](https://developer.salesforce.com/docs/atlas.en-us.apexref.meta/apexref/apex_methods_system_string.htm) for more on String methods.
 
-### Useful Math Methods
+## Useful Math Methods
 
 ```apex
 System.debug(Math.min(2, 3));
@@ -73,9 +73,9 @@ System.debug(Math.abs(-32));
 System.debug(Math.random());
 ```
 
-### Conditional Statements
+## Conditional Statements
 
-#### if, else if, else
+### if, else if, else
 
 ```apex
 Integer age = 20;
@@ -93,16 +93,16 @@ if (age < 15) {
 
 > Note: Curly braces is optional if there is only one statement in the code block.
 
-#### ternary operator
+### ternary operator
 
 ```apex
 Boolean isFun = true;
 String message = isFun ? 'You are having fun' : 'Not fun at all';
 ```
 
-### Loops in Apex
+## Loops in Apex
 
-#### for loop
+### for loop
 
 ```apex
 List<String> fruits = new List<String>{'apple', 'orange', 'grape'};
@@ -111,7 +111,7 @@ for (Integer i = 0; i < fruits.size(); ++i) {
 }
 ```
 
-#### for each loop
+### for each loop
 
 ```apex
 List<String> fruits = new List<String>{'apple', 'orange', 'grape'};
@@ -120,7 +120,7 @@ for (String fruit : fruits) {
 }
 ```
 
-#### while loop
+### while loop
 
 ```apex
 // How many times `num` can be divided by 2 before it is less than or equal to 1?
