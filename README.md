@@ -4,7 +4,7 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ```bash
 $ git clone https://github.com/syahmifauzi/telcowindevs.git
-$ cd telcowin-devs
+$ cd telcowindevs
 $ npm install
 $ npm run dev
 ```
