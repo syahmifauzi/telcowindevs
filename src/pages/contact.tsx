@@ -1,7 +1,11 @@
+import { useState } from 'react'
+
 import Container from '@components/Container'
 
 export default function Contact() {
-  const handleFormSubmit = async (e: any) => {
+  const [result, setResult] = useState({ show: false, message: '', color: '' })
+
+  const handleFormSubmit = (e: any) => {
     e.preventDefault()
 
     const { first_name, last_name, email, description } = e.target
@@ -17,12 +21,26 @@ export default function Contact() {
     const baseUrl = `https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8`
     const finalUrl = `${baseUrl}&${new URLSearchParams(params)}`
 
-    await fetch(finalUrl, {
+    fetch(finalUrl, {
       method: 'POST',
       mode: 'no-cors'
     })
+      .then((_) => {
+        showResult('The form has been submitted successfully.', 'green')
+        e.target.reset()
+      })
+      .catch((_) => {
+        showResult('Something went wrong! Form failed to submit.', 'red')
+      })
 
     e.target.reset()
+  }
+
+  const showResult = (message: string, color: string) => {
+    setResult({ show: true, message, color })
+    setTimeout(() => {
+      setResult({ show: false, message: '', color: '' })
+    }, 5000)
   }
 
   return (
@@ -32,6 +50,12 @@ export default function Contact() {
         <p className="mb-8 text-gray-600">
           This is a Web-to-Lead form. The data will be submitted to Salesforce.
         </p>
+        {result.show && (
+          <div
+            className={`bg-${result.color}-600 text-white p-4 rounded-md font-light mb-8 text-xl`}>
+            {result.message}
+          </div>
+        )}
         <form onSubmit={handleFormSubmit}>
           <div className="flex flex-wrap -mx-3 mb-6">
             <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
@@ -87,7 +111,7 @@ export default function Contact() {
               <label
                 className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
                 htmlFor="grid-comment">
-                Comment
+                Message
               </label>
               <textarea
                 className="resize-y appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
