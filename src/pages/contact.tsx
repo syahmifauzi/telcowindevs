@@ -26,11 +26,11 @@ export default function Contact() {
       mode: 'no-cors'
     })
       .then((_) => {
-        showResult('The form has been submitted successfully.', 'green')
+        showResult('The form has been submitted successfully.', 'bg-green-600')
         e.target.reset()
       })
       .catch((_) => {
-        showResult('Something went wrong! Form failed to submit.', 'red')
+        showResult('Something went wrong! Form failed to submit.', 'bg-red-600')
       })
 
     e.target.reset()
@@ -52,7 +52,7 @@ export default function Contact() {
         </p>
         {result.show && (
           <div
-            className={`bg-${result.color}-600 text-white p-4 rounded-md font-light mb-8 text-xl`}>
+            className={`${result.color} text-white p-4 rounded-md font-light mb-8 text-xl`}>
             {result.message}
           </div>
         )}
