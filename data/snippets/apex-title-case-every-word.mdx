@@ -1,0 +1,21 @@
+---
+title: 'Apex: Title Case Every Word'
+description: 'Apex code snippet to title case every word in a string.'
+icon: 'salesforce'
+date: '2022-02-14'
+---
+
+```apex
+public class Utilities {
+
+    public static String titleCaseEveryWord(String str) {
+        List<String> words = str.toLowerCase().split(' ');
+        String finalStr = '';
+        for (String word : str.toLowerCase().split(' ')) {
+            finalStr += word.substring(0, 1).toUpperCase() + word.substring(1, word.length()) + ' ';
+        }
+        return finalStr;
+    }
+
+}
+```
