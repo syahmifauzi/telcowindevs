@@ -1,0 +1,108 @@
+---
+title: 'Apex Callouts: Salesforce-to-Salesforce Integration'
+description: 'Consume 3rd party Salesforce APIs in Apex Callouts'
+icon: 'salesforce'
+date: '2022-02-14'
+---
+
+Before we get started, let's take a look at the sample code.
+
+```apex:UEMSCallouts.apxc
+public with sharing class UEMSCallouts {
+
+    private static String getAccessToken() {
+
+        String clientId     = EncodingUtil.urlEncode(Label.UEMS_CLIENT_ID,'UTF-8');
+        String clientSecret = EncodingUtil.urlEncode(Label.UEMS_CLIENT_SECRET,'UTF-8');
+        String username     = EncodingUtil.urlEncode(Label.UEMS_USERNAME,'UTF-8');
+        String password     = EncodingUtil.urlEncode(Label.UEMS_PASSWORD,'UTF-8');
+        String reqbody      = 'grant_type=password&client_id='+clientId+'&client_secret='+clientSecret+'&username='+username+'&password='+password;
+        String result       = '';
+
+        Http http = new Http();
+        HttpRequest request = new HttpRequest();
+        request.setEndpoint(Label.UEMS_token_ENDPOINT);
+        request.setMethod('POST');
+        request.setHeader('Content-Type','application/x-www-form-urlencoded');
+        request.setBody(reqbody);
+        HttpResponse response = http.send(request);
+
+        if (response.getStatusCode() == 200) {
+            Map<String, Object> resMap = (Map<String, Object>)JSON.deserializeUntyped(response.getBody());
+            result = (String)resMap.get('access_token');
+        } else {
+            CalloutException e = new CalloutException();
+            e.setMessage('Error retrieving access token!' + response.getBody());
+            throw e;
+        }
+
+        return result;
+    }
+
+    public static List<Map<String, String>> getLeadSources() {
+        String accessToken = getAccessToken();
+        List<Map<String, String>> result = new List<Map<String, String>>();
+
+        if (accessToken == '') return result;
+
+        Http http = new Http();
+        HttpRequest request = new HttpRequest();
+        request.setEndpoint(Label.UEMS_GetLeadSource_ENDPOINT);
+        request.setMethod('GET');
+        request.setHeader('Authorization', 'Bearer ' + accessToken);
+        HttpResponse response = http.send(request);
+
+        if (response.getStatusCode() == 200) {
+            List<Object> resList = (List<Object>)JSON.deserializeUntyped(response.getBody());
+            for (Object item : resList) {
+                Map<String, Object> tempMap = (Map<String, Object>)item;
+                Map<String, String> itemMap = new Map<String, String>();
+                for (String key : tempMap.keySet())
+                    itemMap.put(key, (String)tempMap.get(key));
+                result.add(itemMap);
+            }
+        } else {
+            CalloutException e = new CalloutException();
+            e.setMessage('Error fetching lead sources!' + response.getBody());
+            throw e;
+        }
+
+        return result;
+    }
+
+    public static void createNewLead(Map<String, String> record) {
+        String accessToken = getAccessToken();
+
+        if (accessToken == '') return;
+
+        Map<String, List<Map<String, String>>> dataMap = new Map<String, List<Map<String, String>>>{
+            'record' => new List<Map<String, String>>{record}
+        };
+
+        Http http = new Http();
+        HttpRequest request = new HttpRequest();
+        request.setEndpoint(Label.UEMS_CreateLead_ENDPOINT);
+        request.setMethod('POST');
+        request.setHeader('Authorization', 'Bearer ' + accessToken);
+        request.setHeader('Content-Type', 'application/json;charset=UTF-8');
+        request.setBody(JSON.serialize(dataMap));
+        HttpResponse response = http.send(request);
+
+        if (response.getStatusCode() != 200) {
+            CalloutException e = new CalloutException();
+            e.setMessage('Error creating lead!');
+            throw e;
+        }
+    }
+}
+```
+
+## Code Explanation
+
+- `getAccessToken()` - Get the access token from the `/services/oauth2/token` endpoint every time the callout is executed.
+- `getLeadSources()` - A `GET` method to retrieve data from an endpoint.
+- `createNewLead()` - A `POST` method to create a new record in an endpoint.
+
+## Notes
+
+> Don't hard code the credentials in your Apex class. Store them somewhere and retrieve them in your class.

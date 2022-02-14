@@ -14,14 +14,17 @@ date: '2021-12-17'
 Take note of these 3 lines:
 
 ```html
-<form action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8" method="POST" />
+<form
+  action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8"
+  method="POST" />
 <input type="hidden" name="oid" value="<OID-VALUE>" />
 <input type="hidden" name="retURL" value="<RETURN-URL-VALUE>" />
 ```
 
-- Line 1: The data will be sent to the URL when the form is submitted   
-- Line 2: The `<OID-VALUE>` is the Organization ID or org id. You can get the Organization ID in `Setup > Company Settings > Company Information`.   
-- Line 3: The `<RETURN-URL-VALUE>` is where the user will be redirected after they submit the form.   
+- Line 1: The data will be sent to the URL when the form is submitted
+- Line 2: The `<OID-VALUE>` is the Organization ID or org id. You can get the Organization ID in `Setup > Company Settings > Company Information`.
+- Line 3: The `<RETURN-URL-VALUE>` is where the user will be redirected after they submit the form.
 
+## Notes
 
-> Note: You can modify the form styling as you need. Just make sure the `name` attribute for all fields is the same as in the Lead object.
+> You can modify the form styling as you need. Just make sure the `name` attribute for all fields is the same as in the Lead object.

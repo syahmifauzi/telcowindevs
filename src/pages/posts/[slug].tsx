@@ -1,4 +1,5 @@
 import { GetStaticPaths, GetStaticProps, NextPage } from 'next'
+import { BiCalendar, BiTime, BiUser } from 'react-icons/bi'
 import { getMDXComponent } from 'mdx-bundler/client'
 import { useMemo } from 'react'
 
@@ -7,7 +8,6 @@ import { Code, Frontmatter } from '@libs/types'
 
 import Container from '@components/Container'
 import MDXComponent from '@components/MDXComponents'
-import { BiCalendar, BiTime, BiUser } from 'react-icons/bi'
 
 interface Props {
   code: Code
