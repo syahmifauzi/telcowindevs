@@ -11,7 +11,7 @@ public class Utilities {
     public static String titleCaseEveryWord(String str) {
         List<String> words = str.toLowerCase().split(' ');
         String finalStr = '';
-        for (String word : str.toLowerCase().split(' ')) {
+        for (String word : words) {
             finalStr += word.substring(0, 1).toUpperCase() + word.substring(1, word.length()) + ' ';
         }
         return finalStr;
