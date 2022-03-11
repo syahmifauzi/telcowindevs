@@ -1,0 +1,84 @@
+---
+title: 'How to contribute to this project?'
+excerpt: "Let's learn how to contribute to an open source project and  improve this project by creating new posts, code snippets, or even fix a typo."
+thumbnail: '/static/images/blog/writing.jpg'
+date: '2020-02-02'
+author:
+  name: Syahmi Fauzi
+  picture: '/static/images/authors/sf.jpg'
+---
+
+If you want to contribute to this project and help us to improve it, your help is very welcome. You can either contribute by writing a blog post, code snippets, or even fix a simple typo. You can do so by following the instructions below.
+
+## Requirements
+
+- Create a [Github](https://github.com/) account.
+- Install [Git](https://git-scm.com/) on your computer. Run `git --version` to check if it is installed.
+- Install [Node.js](https://nodejs.org/) on your computer. Run `node --version` to check if it is installed.
+
+## Fork the project
+
+- Go to this [Github repo](https://github.com/syahmifauzi/telcowindevs) and click on the `Fork` button.
+- Once the project is forked, you can start contributing by modifying the forked project.
+
+## Run the forked project locally
+
+Follow the following commands to run the project locally.
+
+```bash:Terminal
+# Clone the forked project to your computer
+git clone https://github.com/<your_username>/telcowindevs.git
+# Change directory to the cloned project
+cd telcowindevs
+# Install all the dependencies
+npm install
+# Run the project locally
+npm run dev
+```
+
+If there is no error, you can now open the project in your browser by navigating to [http://localhost:3000](http://localhost:3000).
+
+## Start making changes to the forked project
+
+- You can create new post or code snippet by creating a new `.mdx` file in the `./data/posts` or `./data/snippets` directory. The file name should be all lowercase and separated by `-`. For example, `my-new-post.mdx`.
+- Make sure to follow the front matter format (the key-value pairs between `---` lines). To be safe, you can copy the front matter from the existing posts or snippets and change the values.
+- Start writing your content in the `.mdx` file and make sure to use Markdown syntax.
+- Save the file and test it locally by running the `npm run dev` command.
+
+## Push the changes to the forked project repository
+
+Make sure to commit all the changes you made to the forked project by running the following commands.
+
+```bash:Terminal
+git add .
+git commit -m "Add new post or snippet or fix a typo <-- change this message"
+git push -u origin main
+# enter your username if prompted
+# for password, use your personal access token
+```
+
+> **Note:** To create a personal access token, go to [https://github.com/settings/tokens/new](https://github.com/settings/tokens/new) and fill in the form. The token should be created with `public_repo` permission. Click `Generate token` and copy the token.
+
+## Make a pull request
+
+- After making the changes to the local project, commit and push the changes to the forked project repository, you can now create a pull request.
+- Go to the forked **Github repo** and click on the `Pull requests` tab. You can create a new pull request by clicking on the `New pull request` button. Simply follow the steps to create pull request.
+- Once the pull request is created, the owner of the project will be notified and will be able to review the changes.
+- If the pull request is accepted, the changes will be merged into the forked project repository and this site will be updated. If the pull request is rejected, the changes will be reverted.
+
+## Note for contributors
+
+- Make sure your forked project repository is up-to-date with the latest changes before making any changes or make a pull request.
+- Make sure your local project is up-to-date with the latest changes before making any changes. You can run `git pull` to update your local project.
+
+## TLDR; Let's test your knowledge!
+
+1. Fork this project.
+2. Run the project locally.
+3. Add your Github username to the contributors list below.
+4. Save it, see it locally, and push it to your Github account.
+5. Open a pull request & wait for me to merge it. It's that easy!
+
+## Contributors
+
+- [syahmifauzi](https://github.com/syahmifauzi)
