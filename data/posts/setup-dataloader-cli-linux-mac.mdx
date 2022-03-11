@@ -1,0 +1,137 @@
+---
+title: 'How to Setup Salesforce Dataloader CLI in Linux/Mac?'
+excerpt: 'Salesforce provides a tool called dataloader that can be used for importing or exporting data from Salesforce. This article will walk you through how to setup the dataloader CLI tool in Linux/Mac.'
+thumbnail: '/static/images/blog/dataloader.png'
+date: '2022-03-11'
+author:
+  name: Syahmi Fauzi
+  picture: '/static/images/authors/sf.jpg'
+---
+
+## Steps to setup dataloader CLI tool in Linux/Mac
+
+1. Clone the Project
+
+```bash:Terminal
+git clone https://github.com/mhamzas/Scripted-Data-Loader-for-Mac-Unix.git
+cd Scripted-Data-Loader-for-Mac-Unix
+```
+
+2. Create a folder `dataloader` and copy the latest `dataloader-<version>-uber.jar` file to it.
+
+```bash:Terminal
+mkdir dataloader
+cp dataloader-<version>-uber.jar dataloader/
+```
+
+3. Update `./bin/encrypt.sh` and `./bin/process.sh` with the correct version of `dataloader-<version>-uber.jar` file and make sure the first line in both files is `#!/bin/bash`.
+
+4. Give both files execute permission.
+
+```bash:Terminal
+chmod +x ./bin/encrypt.sh ./bin/process.sh
+```
+
+5. Generate the private key to encrypt the password.
+
+```bash:Terminal
+./bin/encrypt.sh -k ./conf/myprivate.key
+```
+
+6. Encrypt the Salesforce password and security token using the generated private key.
+
+```bash:Terminal
+./bin/encrypt.sh -e "<password><security_token>" ./conf/myprivate.key
+```
+
+7. Copy the encrypted password and security token to the `./conf/config.properties` file.
+
+8. Update the `./conf/config.properties` file with the correct values.
+
+```md:./conf/config.properties
+sfdc.username=<your_username>
+sfdc.password=<your_encrypted_password>
+sfdc.endpoint=<your_endpoint>
+sfdc.debugMessages=true
+process.encryptionKeyFile=conf/myprivate.key
+# leave the other values as they are
+```
+
+9. Replace the content of the following files with these values. Create the file if it does not exist.
+
+```xml:./conf/process-conf.xml
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+
+    <!-- EXPORT DATA FROM SALESFORCE -->
+    <bean id="csvAccountExtractProcess" class="com.salesforce.dataloader.process.ProcessRunner" scope="singleton">
+        <description>csvAccountExtract gets account info from salesforce and saves info into a CSV file.</description>
+        <property name="name" value="csvAccountExtract" />
+        <property name="configOverrideMap">
+            <map>
+                <entry key="sfdc.debugMessages" value="true" />
+                <entry key="process.operation" value="extract" />
+                <entry key="process.mappingFile" value="conf/accountExtractMap.sdl" />
+                <entry key="sfdc.entity" value="Account" />
+                <entry key="sfdc.extractionRequestSize" value="500" />
+                <entry key="sfdc.extractionSOQL" value="SELECT Id, Name FROM Account LIMIT 5" />
+                <entry key="dataAccess.type" value="csvWrite" />
+                <entry key="dataAccess.name" value="data/accountExtract.csv" />
+            </map>
+        </property>
+    </bean>
+
+    <!-- IMPORT DATA INTO SALESFORCE -->
+    <bean id="csvAccountImportProcess" class="com.salesforce.dataloader.process.ProcessRunner" scope="singleton">
+        <description>csvAccountImport gets account info from CSV file and import it info into Salesforce org.</description>
+        <property name="name" value="csvAccountImport" />
+        <property name="configOverrideMap">
+            <map>
+                <entry key="sfdc.debugMessages" value="true" />
+                <entry key="process.operation" value="insert" />
+                <entry key="process.mappingFile" value="conf/accountImportMap.sdl" />
+                <entry key="sfdc.entity" value="Account" />
+                <entry key="dataAccess.type" value="csvRead" />
+                <entry key="dataAccess.name" value="data/accountImport.csv" />
+            </map>
+        </property>
+    </bean>
+
+</beans>
+```
+
+```md:./conf/accountExtractMap.sdl
+# Account Extract Map
+Id=Id
+Name=Name
+```
+
+```md:./conf/accountImportMap.sdl
+# Account Import Map
+Name=Name
+```
+
+```csv:./data/accountImport.csv
+"NAME"
+"Test Account 1"
+"Test Account 2"
+"Test Account 3"
+"Test Account 4"
+"Test Account 5"
+```
+
+## Usage of dataloader CLI tool
+
+1. Run the sample account extract process. This command will generate `./data/accountImport.csv` CSV file with the account info. It will override the existing file if it exists.
+
+```bash:Terminal
+./bin/process.sh csvAccountExtractProcess
+```
+
+2. Run the sample account import process. This command will import the account info from `./data/accountImport.csv` CSV file to Salesforce.
+
+```bash:Terminal
+./bin/process.sh csvAccountImportProcess
+```
+
+> Credit goes to: [@mhamzas](https://github.com/syahmifauzi/Scripted-Data-Loader-for-Mac-Unix)
