@@ -1,0 +1,139 @@
+---
+title: 'jsPDF: Generate or save PDF in LWC'
+description: 'generate or save PDF to Salesforce File using Javascript'
+icon: 'salesforce'
+date: '2022-04-18'
+---
+
+# jsPDF Lightning Web Component
+
+- [documentation of jsPDF library](http://raw.githack.com/MrRio/jsPDF/master/docs/index.html)
+- [jsPDF playground](http://raw.githack.com/MrRio/jsPDF/master/index.html)
+
+For displaying the generated PDF, no Apex class is required. However to save PDF in Salesforce File,
+we need to have an Apex class which takes the PDF generated in Javascript and send it to the Apex class 
+for that purpose, hence the PdfGenerator class below.
+
+
+## jspdfDemo.html
+
+```apex
+<template>
+	<lightning-button onclick={generatePdf} label="Generate PDF"></lightning-button>
+</template>
+```
+
+## jspdfDemo.js
+
+```apex
+import {LightningElement, api} from 'lwc';
+import {loadScript} from "lightning/platformResourceLoader";
+import JSPDF from '@salesforce/resourceUrl/jspdf';
+import createPDF from '@salesforce/apex/PdfGenerator.createPdf';
+import { ShowToastEvent } from 'lightning/platformShowToastEvent';
+
+export default class JspdfDemo extends LightningElement {
+    @api recordId;
+    contactList = [];
+
+    renderedCallback() {
+        Promise.all([
+            loadScript(this, JSPDF)
+        ]);
+    }
+
+    generatePdf(){
+        const { jsPDF } = window.jspdf; // this line of code is required as if it is not included, it will not
+        // run smoothly as it is said that jsPDF is not locker compliant 
+        
+        
+        const pdfDoc = new jsPDF();
+        pdfDoc.text("Testing Generate PDF through Javascript", 20, 20);
+        
+        // pdfDoc.save("demo.pdf"); //this code allows you to view the generated PDF and enable you to download it locally
+
+
+   const base64 = pdfDoc.output('dataurlstring');
+   createPDF({IdContact:this.recordId, pdfContent:base64})
+     .then(res => {
+        console.log('success', res);
+        this.handleSuccessToast();       
+        eval("$A.get('e.force:refreshView').fire();") //this code refresh the page as to display the newly created PDF, might have other better ways to do it
+     })
+     .catch(err => console.log('failed', err));
+
+    }
+    
+    handleSuccessToast = () => {
+        const evt = new ShowToastEvent({
+          title: 'Success',
+          message: 'PDF saved in Salesforce',
+          variant: 'success',
+        });
+        this.dispatchEvent(evt);
+      };
+
+}
+```
+
+> Note: This example use contact object for recordId. However,
+should you want a recordId specific to an object data, you can change accordingly. 
+
+> To see the preview of generated PDF, use the save() function of jsPDF and comment out below. To save it to
+Salesforce File, comment out save() function above and uncomment the rest of the operation.
+
+## jspdfDemo.js-meta.xml
+
+```apex
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>54.0</apiVersion>
+    <description>Jspdf Demo</description>
+    <isExposed>true</isExposed>
+    <masterLabel>Jspdf Demo</masterLabel>
+    <targets>
+        <target>lightning__RecordPage</target>
+    </targets>
+</LightningComponentBundle>
+```
+
+
+
+## PdfGenerator.cls
+
+```apex
+public with sharing class PdfGenerator
+{
+	@AuraEnabled
+    public static Id createPdf(String IdContact, String pdfContent){
+		String base64 = pdfContent.split('base64,')[1]; 
+       Blob strPdfBody = EncodingUtil.base64Decode(base64);
+        try {
+		System.debug(IdContact);
+		System.debug(strPdfBody);
+            Contact objContact = [SELECT Name FROM Contact WHERE Id = :IdContact LIMIT 1];
+			System.debug('pdfContent:' + pdfContent);
+            ContentVersion objVersion = new ContentVersion();
+            objVersion.ContentLocation = 'S'; // to use S specify this document is in Salesforce, to use E for external files
+            objVersion.PathOnClient = 'Test ' +objContact.Name +'.pdf'; // The files name, extension is very important here which will help the file in preview.
+            objVersion.Title = 'Test' +objContact.Name;
+            objVersion.VersionData = strPdfBody;
+            insert objVersion;
+
+            Id objDocId = [SELECT ContentDocumentId FROM ContentVersion WHERE Id =:objVersion.Id].ContentDocumentId;
+            ContentDocumentLink objDocumentLink = New ContentDocumentLink();
+            objDocumentLink.LinkedEntityId = objContact.Id; // Specify RECORD ID here i.e Any Object ID (Standard Object/Custom Object)
+            objDocumentLink.ContentDocumentId = objDocId;
+            objDocumentLink.shareType = 'V';
+            insert objDocumentLink;
+            return objDocumentLink.Id;
+        } catch (Exception e) {
+            throw new AuraHandledException(e.getMessage());
+        }
+    }	
+}
+```
+
+
+
+
